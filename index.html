@@ -8,5 +8,35 @@
 </head>
 <body>
 	Hi
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyClcOIs8mgAtSSqdbZRkm6oSKk6KG4AJmc",
+    authDomain: "push-project-177ed.firebaseapp.com",
+    databaseURL: "https://push-project-177ed.firebaseio.com",
+    projectId: "push-project-177ed",
+    storageBucket: "push-project-177ed.appspot.com",
+    messagingSenderId: "799979787181"
+  };
+  firebase.initializeApp(config);
+  firebase.initializeApp(config);
+  const messaging = firebase.messaging();
+  messaging.requestPermission()
+  .then(function(){
+  	console.log("Have permission");
+  	return messaging.getToken();
+  })
+  .then(function(token){
+  	console.log(token);
+  })
+  .catch(function(err){
+  	console.log("Error");
+  })
+
+  messaging.onMessage(function(payload){
+  	console.log('onMessage',payload);
+  });
+</script>
 </body>
 </html>

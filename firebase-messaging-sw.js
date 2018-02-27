@@ -10,7 +10,7 @@ importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js');
     messagingSenderId: "799979787181"
   };
   firebase.initializeApp(config);
-  const messaging = firebase.messaging();
+  
   messaging.setBackgroundMessageHandler(function(){
   	const title = "Hello World";
   	const options = {

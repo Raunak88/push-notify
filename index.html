@@ -14,16 +14,6 @@
   
 <script>
   // Initialize Firebase
-  firebase.messaging().useServiceWorker('firebase-messaging-sw.js').then((registration) => {
-    const messaging = firebase.messaging();
-    messaging.useServiceWorker(registration);
-    return messaging.getToken();
-}).then(function(token){
-    console.log(token);
-  })
-  .catch(function(err){
-    console.log("Error");
-  })
 
   var config = {
     apiKey: "AIzaSyClcOIs8mgAtSSqdbZRkm6oSKk6KG4AJmc",
@@ -34,6 +24,16 @@
     messagingSenderId: "799979787181"
   };
   firebase.initializeApp(config); 
+   firebase.messaging().useServiceWorker('firebase-messaging-sw.js').then((registration){
+    const messaging = firebase.messaging();
+    messaging.useServiceWorker(registration);
+    return messaging.getToken();
+}).then(function(token){
+    console.log(token);
+  })
+  .catch(function(err){
+    console.log("Error");
+  })
   
 </script>
 

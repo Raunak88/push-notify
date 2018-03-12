@@ -28,12 +28,13 @@
     const messaging = firebase.messaging();
     messaging.useServiceWorker(registration);
     return messaging.getToken();
-}).then(function(token){
+  })
+   .then(function(token){
     console.log(token);
   })
   .catch(function(err){
     console.log("Error");
-  })
+  });
   
 </script>
 

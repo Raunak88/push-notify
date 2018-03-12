@@ -14,7 +14,6 @@
   
 <script>
   // Initialize Firebase
-
   var config = {
     apiKey: "AIzaSyClcOIs8mgAtSSqdbZRkm6oSKk6KG4AJmc",
     authDomain: "push-project-177ed.firebaseapp.com",
@@ -23,19 +22,24 @@
     storageBucket: "push-project-177ed.appspot.com",
     messagingSenderId: "799979787181"
   };
-  firebase.initializeApp(config); 
-   firebase.messaging().useServiceWorker("/firebase-messaging-sw.js", {scope: "firebase-cloud-messaging-push-scope"}).then(function (registration) {
-    const messaging = firebase.messaging();
-    messaging.useServiceWorker(registration);
-    return messaging.getToken();
+  firebase.initializeApp(config);
+  
+  const messaging = firebase.messaging();
+  messaging.requestPermission()
+  .then(function(){
+  	console.log("Have permission");
+  	return messaging.getToken();
   })
-   .then(function(token){
-    console.log(token);
+  .then(function(token){
+  	console.log(token);
   })
   .catch(function(err){
-    console.log("Error");
+  	console.log("Error");
+  })
+
+  messaging.onMessage(function(payload){
+  	console.log('onMessage',payload);
   });
-  
 </script>
 
 </body>

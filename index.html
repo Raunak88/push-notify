@@ -24,7 +24,7 @@
     messagingSenderId: "799979787181"
   };
   firebase.initializeApp(config); 
-   firebase.messaging().useServiceWorker("firebase-messaging-sw.js", {scope: "firebase-cloud-messaging-push-scope"}).then(function (registration) {
+   firebase.messaging().useServiceWorker("/firebase-messaging-sw.js", {scope: "firebase-cloud-messaging-push-scope"}).then(function (registration) {
     const messaging = firebase.messaging();
     messaging.useServiceWorker(registration);
     return messaging.getToken();

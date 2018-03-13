@@ -13,9 +13,13 @@
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('Registered!');
+      navigator.serviceWorker.register('sw.js').then((registration) => {
+    const messaging = firebase.messaging();
+    messaging.useServiceWorker(registration);
+    return messaging.getToken().then(function(currentToken) {
+    console.log(currentToken);
+  })
+})
       }, function(err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);

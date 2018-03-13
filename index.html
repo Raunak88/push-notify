@@ -9,19 +9,21 @@
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 </head>
 <body>
-	Hi	
+	Hi
+	
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('sw.js').then((registration) => {
-    const messaging = firebase.messaging();
-    messaging.useServiceWorker(registration);
-    return messaging.getToken().then(function(currentToken) {
-    console.log(currentToken);
-  });
-})
-    }
-     
+      navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('Registered!');
+      }, function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      }).catch(function(err) {
+        console.log(err);
+      });
+    });
    } else {
      console.log('service worker is not supported');
    }

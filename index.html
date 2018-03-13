@@ -11,14 +11,9 @@
 <body>
 	Hi
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>  
-
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('Registered!');
-        var config = {
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyClcOIs8mgAtSSqdbZRkm6oSKk6KG4AJmc",
     authDomain: "push-project-177ed.firebaseapp.com",
     databaseURL: "https://push-project-177ed.firebaseio.com",
@@ -26,29 +21,39 @@
     storageBucket: "push-project-177ed.appspot.com",
     messagingSenderId: "799979787181"
   };
-  firebase.initializeApp(config);
-  const messaging = firebase.messaging();
-  messaging.requestPermission()
-  .then(function(){
-    console.log('I am in here');
-
-    return messaging.getToken()
-  .then(function(currentToken) {
-    console.log(currentToken);
-  })
-  .catch(function(err) {
-    console.log('An error occurred while retrieving token. ', err);
-    showToken('Error retrieving Instance ID token. ', err);
-    setTokenSentToServer(false);
-  });
-
-  }).catch(function(err){
-    console.log('Error');
-  });
-
+  firebase.initializeApp(config);  
   messaging.onMessage(function(payload){
-    console.log('onMessage',payload);
+  	console.log('onMessage',payload);
   });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('Registered!');
+
+        const messaging = firebase.messaging();
+        messaging.requestPermission()
+        .then(function(){
+          console.log('I am in here');
+
+          return messaging.getToken()
+        .then(function(currentToken) {
+          console.log(currentToken);
+        })
+        .catch(function(err) {
+          console.log('An error occurred while retrieving token. ', err);
+          showToken('Error retrieving Instance ID token. ', err);
+          setTokenSentToServer(false);
+        });
+
+        }).catch(function(err){
+          console.log('Error');
+        });
+
+
+        
       }, function(err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);

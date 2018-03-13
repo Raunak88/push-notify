@@ -11,9 +11,14 @@
 <body>
 	Hi
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>  
+
 <script>
-  // Initialize Firebase
-  var config = {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('Registered!');
+        var config = {
     apiKey: "AIzaSyClcOIs8mgAtSSqdbZRkm6oSKk6KG4AJmc",
     authDomain: "push-project-177ed.firebaseapp.com",
     databaseURL: "https://push-project-177ed.firebaseio.com",
@@ -42,15 +47,8 @@
   });
 
   messaging.onMessage(function(payload){
-  	console.log('onMessage',payload);
+    console.log('onMessage',payload);
   });
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('Registered!');
       }, function(err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);

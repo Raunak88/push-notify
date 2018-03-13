@@ -18,15 +18,10 @@
     messaging.useServiceWorker(registration);
     return messaging.getToken().then(function(currentToken) {
     console.log(currentToken);
-  })
+  });
 })
-      }, function(err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      }).catch(function(err) {
-        console.log(err);
-      });
-    });
+    }
+     
    } else {
      console.log('service worker is not supported');
    }

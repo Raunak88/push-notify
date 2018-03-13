@@ -21,8 +21,29 @@
     storageBucket: "push-project-177ed.appspot.com",
     messagingSenderId: "799979787181"
   };
-  firebase.initializeApp(config);   
-  
+  firebase.initializeApp(config);
+  const messaging = firebase.messaging();
+  messaging.requestPermission()
+  .then(function(){
+    console.log('I am in here');
+
+    return messaging.getToken()
+  .then(function(currentToken) {
+    console.log(currentToken);
+  })
+  .catch(function(err) {
+    console.log('An error occurred while retrieving token. ', err);
+    showToken('Error retrieving Instance ID token. ', err);
+    setTokenSentToServer(false);
+  });
+
+  }).catch(function(err){
+    console.log('Error');
+  });
+
+  messaging.onMessage(function(payload){
+  	console.log('onMessage',payload);
+  });
 </script>
 <script>
   if ('serviceWorker' in navigator) {
@@ -30,28 +51,6 @@
       navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(registration) {
         // Registration was successful
         console.log('Registered!');
-
-        const messaging = firebase.messaging();
-        messaging.requestPermission()
-        .then(function(){
-          console.log('I am in here');
-
-          return messaging.getToken()
-        .then(function(currentToken) {
-          console.log(currentToken);
-        })
-        .catch(function(err) {
-          console.log('An error occurred while retrieving token. ', err);
-          showToken('Error retrieving Instance ID token. ', err);
-          setTokenSentToServer(false);
-        });
-
-        }).catch(function(err){
-          console.log('Error');
-        });
-
-
-
       }, function(err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);

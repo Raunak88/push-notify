@@ -23,18 +23,26 @@
   };
   firebase.initializeApp(config);
   
+  firebase.initializeApp(config);
+
   const messaging = firebase.messaging();
   messaging.requestPermission()
   .then(function(){
-  	console.log("Have permission");
-  	return messaging.getToken();
+    console.log('I am in here');
+
+    return messaging.getToken()
+  .then(function(currentToken) {
+    console.log(currentToken);
   })
-  .then(function(token){
-  	console.log(token);
-  })
-  .catch(function(err){
-  	console.log("Error");
-  })
+  .catch(function(err) {
+    console.log('An error occurred while retrieving token. ', err);
+    showToken('Error retrieving Instance ID token. ', err);
+    setTokenSentToServer(false);
+  });
+
+  }).catch(function(err){
+    console.log('Error');
+  });
 
   messaging.onMessage(function(payload){
   	console.log('onMessage',payload);

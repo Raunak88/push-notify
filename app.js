@@ -13,8 +13,7 @@
   const messaging = firebase.messaging();
 
  self.addEventListener('install', function(event) {  
-          console.log("Install Step, let's cache some 
-          files =D");  
+          console.log("Install Step, let's cache some files =D");  
         });
 
       // [*] SW Activate State Event.

@@ -13,10 +13,11 @@
   messaging.requestPermission()
 .then(function() {
   console.log('Notification permission granted.');
-  messaging.getToken().then(function(token){
+  return messaging.getToken();
+})
+.then(function(token){
     console.log(token);
   })
-})
 
 
 .catch(function(err) {

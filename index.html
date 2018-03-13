@@ -21,9 +21,7 @@
     storageBucket: "push-project-177ed.appspot.com",
     messagingSenderId: "799979787181"
   };
-  firebase.initializeApp(config);  
-  messaging.onMessage(function(payload){
-  	console.log('onMessage',payload);
+  firebase.initializeApp(config);   
   });
 </script>
 <script>
@@ -53,7 +51,7 @@
         });
 
 
-        
+
       }, function(err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);

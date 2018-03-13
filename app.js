@@ -11,6 +11,16 @@
   firebase.initializeApp(config);
   
   const messaging = firebase.messaging();
+
+ self.addEventListener('install', function(event) {  
+          console.log("Install Step, let's cache some 
+          files =D");  
+        });
+
+      // [*] SW Activate State Event.
+      self.addEventListener('activate', function(event) {          
+      console.log('Activated!', event);});
+
   messaging.requestPermission()
   .then(function(){
     console.log('I am in here');

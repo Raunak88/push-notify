@@ -21,24 +21,9 @@
     storageBucket: "push-project-177ed.appspot.com",
     messagingSenderId: "799979787181"
   };
+  window.firebase = firebase;
   firebase.initializeApp(config);
   
-  const messaging = firebase.messaging();
-  messaging.requestPermission()
-  .then(function(){
-  	console.log("Have permission");
-  	return messaging.getToken();
-  })
-  .then(function(token){
-  	console.log(token);
-  })
-  .catch(function(err){
-  	console.log("Error");
-  })
-
-  messaging.onMessage(function(payload){
-  	console.log('onMessage',payload);
-  });
 </script>
 <script>
   if ('serviceWorker' in navigator) {

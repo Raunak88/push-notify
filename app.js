@@ -42,7 +42,7 @@ function initializeUI() {
 
     updateBtn();
   });
-}
+});
 }
 function updateBtn() {
   if (isSubscribed) {

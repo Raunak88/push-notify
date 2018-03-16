@@ -7,4 +7,8 @@ var notifyBtn = document.getElementById('bell')
 
 if('serviceWorker' in navigator && 'PushManager' in window){
 	notifyBtn.classList.remove('hidden');
+	
+	if(Notification.permission !== 'denied'){
+		notifyBtn.disabled = false;
+	}
 }

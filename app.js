@@ -17,7 +17,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   });
 } else {
   console.warn('Push messaging is not supported');
-  pushButton.textContent = 'Push Not Supported';
+  notifyBtn.textContent = 'Push Not Supported';
 }
 
 
@@ -38,10 +38,10 @@ function initializeUI() {
 }
 function updateBtn() {
   if (isSubscribed) {
-    
+    notifyBtn.textContent = 'Disable Push Messaging';
   } else {
-    
+    notifyBtn.textContent = 'Disable Push Messaging';
   }
 
-  pushButton.disabled = false;
+  notifyBtn.disabled = false;
 }

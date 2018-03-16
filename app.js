@@ -11,4 +11,13 @@ if('serviceWorker' in navigator && 'PushManager' in window){
 	if(Notification.permission !== 'denied'){
 		notifyBtn.disabled = false;
 	}
+	
+	navigator.serviceWorker.ready.then(sw =>{
+		sp.sw = sw;
+		
+		sw.pushManager.getSubscription().then(s => {
+			var isSubscribed = s !==null;
+			notifyBtn.disabled = isSubscribed?true:false;
+		})
+	})
 }

@@ -1,23 +1,47 @@
-
-var pubkey ="BCLnl2BFwGStqopEUJhhyK92o8QQUbdgUBMNIMbDw5hOYAS16zMN6X19a41IpsrpcbIvpyBqev6QeKenDy7-Ito";
-
-//Private Key 9E-sLIM5TH38ZprRpSOPIOpVsBDQS62jBremexnZC_g
-
 var notifyBtn = document.getElementById('bell')
 
-if('serviceWorker' in navigator && 'PushManager' in window){
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+
+  navigator.serviceWorker.register('sw.js')
+  .then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
 	notifyBtn.classList.remove('hidden');
-	
 	if(Notification.permission !== 'denied'){
 		notifyBtn.disabled = false;
 	}
-	
-	navigator.serviceWorker.ready.then(sw =>{
-		var sp = sw;
-		
-		sp.pushManager.getSubscription().then(s => {
-			var isSubscribed = s !==null;
-			notifyBtn.disabled = isSubscribed?true:false;
-		})
-	})
+    swRegistration = swReg;
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
+}
+
+
+function initializeUI() {
+  // Set the initial subscription value
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+
+    if (isSubscribed) {
+      console.log('User IS subscribed.');
+    } else {
+      console.log('User is NOT subscribed.');
+    }
+
+    updateBtn();
+  });
+}
+function updateBtn() {
+  if (isSubscribed) {
+    
+  } else {
+    
+  }
+
+  pushButton.disabled = false;
 }

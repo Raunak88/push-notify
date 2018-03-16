@@ -7,10 +7,16 @@
 	<link rel="stylesheet" href="">
 	<link rel="manifest" href="manifest.json">
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<style>
+.hidden{
+display:none;
+}
+</style>
 </head>
+
 <body>
 	Hi
-	
+	<button class="hidden" id="bell">Subscribe</button>
   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {

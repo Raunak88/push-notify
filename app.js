@@ -43,6 +43,7 @@ function initializeUI() {
     updateBtn();
   });
 }
+}
 function updateBtn() {
   if (isSubscribed) {
     notifyBtn.textContent = 'Disable Push Messaging';

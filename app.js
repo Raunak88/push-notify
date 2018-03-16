@@ -23,6 +23,13 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 function initializeUI() {
   // Set the initial subscription value
+  notifyBtn.addEventListener('click', function() {
+    pushButton.disabled = true;
+    if (isSubscribed) {
+      // TODO: Unsubscribe user
+    } else {
+      subscribeUser();
+    }
   swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     isSubscribed = !(subscription === null);

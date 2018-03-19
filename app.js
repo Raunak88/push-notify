@@ -1,4 +1,4 @@
-var notifyBtn = document.getElementById('bell')
+var notifyBtn = document.getElementById('bell');
 const applicationServerPublicKey ="BIEqN3JqtkzpI1NwBDulPj8asfeLMk1RTlJyyvRGV7ncNhXAx7M0SeT8m-9JrfgbJdjX-38ONgMCBgB2TqATrrQ";
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');

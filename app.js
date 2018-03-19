@@ -47,12 +47,7 @@ function initializeUI() {
       unsubscribeUser();
     } else {
       subscribeUser();
-    }
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    isSubscribed = !(subscription === null);
-    updateBtn();
-  });
+    }  
 });
 }
 function updateBtn() {
@@ -71,6 +66,11 @@ function updateBtn() {
 }
 function subscribeUser() {
   var applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+    updateBtn();
+  });
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey

@@ -5,7 +5,7 @@ self.addEventListener('push', function(event) {
 
   var title = 'Push Codelab';
   var options = {
-    body: '${event.data.text()}',
+    body: ${event.data.text()},
     icon: 'images/icon.png',
     badge: 'images/badge.png'
   };

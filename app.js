@@ -75,11 +75,6 @@ function subscribeUser() {
     updateBtn();
   });
 }
-const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-swRegistration.pushManager.subscribe({
-  userVisibleOnly: true,
-  applicationServerKey: applicationServerKey
-})
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
 

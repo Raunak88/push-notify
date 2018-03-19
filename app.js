@@ -42,25 +42,25 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 function initializeUI() {
   // Set the initial subscription value
-  notifyBtn.addEventListener('click', function() {    
+  notifyBtn.addEventListener('click', function() {
+    notifyBtn.disabled = true;
     if (isSubscribed) {
       unsubscribeUser();
     } else {
-		 swRegistration.pushManager.getSubscription()
+      subscribeUser();
+    }
+  swRegistration.pushManager.getSubscription()
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
     updateBtn();
   });
-      subscribeUser();
-	 
-    }
-  
 });
 }
 function updateBtn() {
 	if (Notification.permission === 'denied') {
     notifyBtn.textContent = 'Subscribe';
-	updateSubscriptionOnServer(null);
+    notifyBtn.disabled = true;
+    updateSubscriptionOnServer(null);
     return;
   }
   if (isSubscribed) {

@@ -19,10 +19,6 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.warn('Push messaging is not supported');
   notifyBtn.textContent = 'Push Not Supported';
 }
-
-
-function initializeUI() {
-  // Set the initial subscription value
   notifyBtn.addEventListener('click', function() {
     pushButton.disabled = true;
     if (isSubscribed) {
@@ -43,6 +39,10 @@ function initializeUI() {
     updateBtn();
   });
 });
+
+function initializeUI() {
+  // Set the initial subscription value
+
 }
 function updateBtn() {
   if (isSubscribed) {

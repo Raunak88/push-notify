@@ -42,8 +42,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 function initializeUI() {
   // Set the initial subscription value
-  notifyBtn.addEventListener('click', function() {
-    notifyBtn.disabled = true;
+  notifyBtn.addEventListener('click', function() {    
     if (isSubscribed) {
       unsubscribeUser();
     } else {

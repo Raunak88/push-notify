@@ -93,7 +93,8 @@ function subscribeUser() {
 }
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
- 
+ var derp = JSON.stringify(subscription);
+  console.log(derp);
 }
 function unsubscribeUser() {
   swRegistration.pushManager.getSubscription()

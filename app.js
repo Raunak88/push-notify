@@ -73,7 +73,7 @@ function updateBtn() {
   if (isSubscribed) {
     notifyBtn.textContent = 'Unsubscribe';
   } else {
-    notifyBtn.textContent = 'Enable Push Messaging';
+    notifyBtn.textContent = 'Subscribe';
   }
 
   notifyBtn.disabled = false;

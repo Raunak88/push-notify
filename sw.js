@@ -5,7 +5,7 @@ self.addEventListener('push', function(event) {
 
   var title = 'Push Recived';
   var options = {
-    body: `Your Message +"${event.data.text()}"`,
+    body: `Your Message: "${event.data.text()}"`,
     icon: 'images/icon.png',
     badge: 'images/badge.png'
   };

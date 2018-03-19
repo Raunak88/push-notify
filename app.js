@@ -98,7 +98,7 @@ function subscribeUser() {
     console.log('Failed to subscribe the user: ', err);
     updateBtn();
   });
-
+}
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
 

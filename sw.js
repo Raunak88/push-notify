@@ -3,9 +3,9 @@ self.addEventListener('push', function(event) {
   console.log('[Service Worker] Push Received.');
   console.log('[Service Worker] Push had this data: "${event.data.text()}"');
 
-  var title = 'Push Codelab';
+  var title = 'Push Recived';
   var options = {
-    body: ${event.data.text()},
+    body: 'Your Message '+${event.data.text()},
     icon: 'images/icon.png',
     badge: 'images/badge.png'
   };

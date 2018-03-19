@@ -1,5 +1,23 @@
+var applicationServerPublicKey ="BIEqN3JqtkzpI1NwBDulPj8asfeLMk1RTlJyyvRGV7ncNhXAx7M0SeT8m-9JrfgbJdjX-38ONgMCBgB2TqATrrQ";
 var notifyBtn = document.getElementById('bell');
-const applicationServerPublicKey ="BIEqN3JqtkzpI1NwBDulPj8asfeLMk1RTlJyyvRGV7ncNhXAx7M0SeT8m-9JrfgbJdjX-38ONgMCBgB2TqATrrQ";
+var isSubscribed = false;
+var swRegistration = null;
+
+function urlB64ToUint8Array(base64String) {
+  var padding = '='.repeat((4 - base64String.length % 4) % 4);
+  var base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  var rawData = window.atob(base64);
+  var outputArray = new Uint8Array(rawData.length);
+
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');
 
@@ -54,9 +72,15 @@ function updateBtn() {
 
   notifyBtn.disabled = false;
 }
+navigator.serviceWorker.register('sw.js')
+.then(function(swReg) {
+  console.log('Service Worker is registered', swReg);
 
+  swRegistration = swReg;
+  initializeUI();
+})
 function subscribeUser() {
-  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  var applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey
@@ -74,7 +98,7 @@ function subscribeUser() {
     console.log('Failed to subscribe the user: ', err);
     updateBtn();
   });
-}
+
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
 

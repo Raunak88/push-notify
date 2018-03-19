@@ -51,7 +51,7 @@ function initializeUI() {
     isSubscribed = !(subscription === null);
     updateBtn();
   });
-  subscribeUser();
+      subscribeUser();
 	 
     }
   

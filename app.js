@@ -1,5 +1,5 @@
 var notifyBtn = document.getElementById('bell')
-
+const applicationServerPublicKey ="BIEqN3JqtkzpI1NwBDulPj8asfeLMk1RTlJyyvRGV7ncNhXAx7M0SeT8m-9JrfgbJdjX-38ONgMCBgB2TqATrrQ";
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');
 
@@ -11,6 +11,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 		notifyBtn.disabled = false;
 	}
     swRegistration = swReg;
+	initializeUI();
   })
   .catch(function(error) {
     console.error('Service Worker Error', error);
@@ -19,8 +20,12 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.warn('Push messaging is not supported');
   notifyBtn.textContent = 'Push Not Supported';
 }
+
+
+function initializeUI() {
+  // Set the initial subscription value
   notifyBtn.addEventListener('click', function() {
-    pushButton.disabled = true;
+    notifyBtn.disabled = true;
     if (isSubscribed) {
       // TODO: Unsubscribe user
     } else {
@@ -39,17 +44,53 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
     updateBtn();
   });
 });
-
-function initializeUI() {
-  // Set the initial subscription value
-
 }
 function updateBtn() {
   if (isSubscribed) {
     notifyBtn.textContent = 'Disable Push Messaging';
   } else {
-    notifyBtn.textContent = 'Disable Push Messaging';
+    notifyBtn.textContent = 'Enable Push Messaging';
   }
 
   notifyBtn.disabled = false;
+}
+
+function subscribeUser() {
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: applicationServerKey
+  })
+  .then(function(subscription) {
+    console.log('User is subscribed.');
+
+    updateSubscriptionOnServer(subscription);
+
+    isSubscribed = true;
+
+    updateBtn();
+  })
+  .catch(function(err) {
+    console.log('Failed to subscribe the user: ', err);
+    updateBtn();
+  });
+}
+const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+swRegistration.pushManager.subscribe({
+  userVisibleOnly: true,
+  applicationServerKey: applicationServerKey
+})
+function updateSubscriptionOnServer(subscription) {
+  // TODO: Send subscription to application server
+
+  const subscriptionJson = document.querySelector('.js-subscription-json');
+  const subscriptionDetails =
+    document.querySelector('.js-subscription-details');
+
+  if (subscription) {
+    subscriptionJson.textContent = JSON.stringify(subscription);
+    subscriptionDetails.classList.remove('is-invisible');
+  } else {
+    subscriptionDetails.classList.add('is-invisible');
+  }
 }

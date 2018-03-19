@@ -58,9 +58,8 @@ function initializeUI() {
 }
 function updateBtn() {
 	if (Notification.permission === 'denied') {
-    notifyBtn.textContent = 'Permission Denied';
-    notifyBtn.disabled = true;
-    updateSubscriptionOnServer(null);
+    notifyBtn.textContent = 'Subscribe';
+	updateSubscriptionOnServer(null);
     return;
   }
   if (isSubscribed) {
